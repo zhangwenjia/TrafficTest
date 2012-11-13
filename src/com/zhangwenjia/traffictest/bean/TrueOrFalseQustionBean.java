@@ -10,7 +10,7 @@ public class TrueOrFalseQustionBean {
 	public String question_content;
 	public String picture_name;
 	public String picture_path;
-	public int correct_answer_4truefalse;
+	public String correct_answer_4truefalse;
 	public String answer_analysis;
 	
 	public UserAnswer4TrueOrFalse userAnswer;

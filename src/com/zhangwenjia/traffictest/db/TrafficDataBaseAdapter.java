@@ -119,9 +119,9 @@ public class TrafficDataBaseAdapter {
 					+ F_B + " text NOT NULL,"
 					+ F_C + " text NOT NULL,"
 					+ F_D + " text NOT NULL,"
-					+ F_CORRECT_ANSWER_4CHOISE + " integer NOT NULL,"
+					+ F_CORRECT_ANSWER_4CHOISE + " text NOT NULL,"
 					+ F_ANSWER_ANALYSIS + " text," 
-					+ F_USER_ANSWER_4CHOISE + " integer," 
+					+ F_USER_ANSWER_4CHOISE + " text," 
 					+ F_USER_RESULT + " boolean" 
 					+ ")";
 			db.execSQL(sql);
@@ -137,9 +137,9 @@ public class TrafficDataBaseAdapter {
 					+ F_QUESTION_CONTENT + " text NOT NULL,"
 					+ F_PICTURE_NAME + " text," 
 					+ F_PICTURE_PATH + " text,"
-					+ F_CORRECT_ANSWER_4TRUEFALSE + " integer NOT NULL,"
+					+ F_CORRECT_ANSWER_4TRUEFALSE + " text NOT NULL,"
 					+ F_ANSWER_ANALYSIS + " text," 
-					+ F_USER_ANSWER_4TRUEFALSE + " integer,"
+					+ F_USER_ANSWER_4TRUEFALSE + " text,"
 					+ F_USER_RESULT + " boolean" 
 					+ ")";
 			db.execSQL(sql);

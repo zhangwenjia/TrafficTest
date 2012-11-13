@@ -1,11 +1,20 @@
 package com.zhangwenjia.traffictest;
 
+
+import java.io.File;
+import java.io.IOException;
+
 import com.zhangwenjia.traffictest.bean.ChoiseQustionBean;
 import com.zhangwenjia.traffictest.bean.TrueOrFalseQustionBean;
 import com.zhangwenjia.traffictest.db.TrafficDataBaseAdapter;
 
+import jxl.*;
+import jxl.read.biff.BiffException;
+
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
@@ -15,6 +24,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        /*
         ChoiseQustionBean cq = new ChoiseQustionBean();
         cq.number="1020501";
 		cq.chapter="8";
@@ -44,8 +54,35 @@ public class MainActivity extends Activity {
 		tofq.correct_answer_4truefalse=1;
 		tofq.answer_analysis="除取得《报废汽车回收企业资格证书》的企业外，任何单位和个人不得从事汽车回收活动。";
         
-        
         TrafficDataBaseAdapter.getInstance(this).insertTrueOrFalseQuestion(tofq);
+        */
+        
+        
+        // Environment.getExternalStorageDirectory() + "/vancl/apk/";
+        try {
+			Workbook workbook = Workbook.getWorkbook(new File(Environment.getExternalStorageDirectory()+"/"+"zhangwenjia.xls"));
+			Sheet sheet = workbook.getSheet(0);
+			Cell a1 = sheet.getCell(0,0); 
+			Cell b2 = sheet.getCell(1,1); 
+			Cell c2 = sheet.getCell(2,1); 
+
+			String stringa1 = a1.getContents(); 
+			String stringb2 = b2.getContents(); 
+			String stringc2 = c2.getContents(); 
+			
+			
+			Log.d("mylog","0,0 is:"+stringa1);
+			Log.d("mylog","1,1 is:"+stringb2);
+			Log.d("mylog","2,1 is:"+stringc2);
+			
+			workbook.close();
+		} catch (BiffException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     @Override

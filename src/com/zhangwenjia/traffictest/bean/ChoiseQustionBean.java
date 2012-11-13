@@ -14,7 +14,7 @@ public class ChoiseQustionBean {
 	public String b;
 	public String c;
 	public String d;
-	public int correct_answer_4choise;
+	public String correct_answer_4choise;
 	public String answer_analysis;
 	
 	public UserAnswer4Choise userAnswer;
