@@ -1,5 +1,7 @@
 package com.zhangwenjia.traffictest.db;
 
+import java.util.ArrayList;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,8 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.zhangwenjia.traffictest.bean.ChoiseQustionBean;
 import com.zhangwenjia.traffictest.bean.TrueOrFalseQustionBean;
-import com.zhangwenjia.traffictest.bean.UserAnswer4Choise;
-import com.zhangwenjia.traffictest.bean.UserAnswer4TrueOrFalse;
 
 public class TrafficDataBaseAdapter {
 
@@ -122,7 +122,7 @@ public class TrafficDataBaseAdapter {
 					+ F_CORRECT_ANSWER_4CHOISE + " text NOT NULL,"
 					+ F_ANSWER_ANALYSIS + " text," 
 					+ F_USER_ANSWER_4CHOISE + " text," 
-					+ F_USER_RESULT + " boolean" 
+					+ F_USER_RESULT + " text" 
 					+ ")";
 			db.execSQL(sql);
 
@@ -140,7 +140,7 @@ public class TrafficDataBaseAdapter {
 					+ F_CORRECT_ANSWER_4TRUEFALSE + " text NOT NULL,"
 					+ F_ANSWER_ANALYSIS + " text," 
 					+ F_USER_ANSWER_4TRUEFALSE + " text,"
-					+ F_USER_RESULT + " boolean" 
+					+ F_USER_RESULT + " text" 
 					+ ")";
 			db.execSQL(sql);
 		}
@@ -179,6 +179,36 @@ public class TrafficDataBaseAdapter {
 		db.insert(TB_CHOICE_QUESTION, null, contentValues);
 		db.close();
 	}
+
+	/***
+	 * 插入一组选择题数据
+	 * @param list
+	 */
+	public void insertOptionChoiseQustionList(ArrayList<ChoiseQustionBean> list){
+		int size = list.size();
+		for(int i=0;i<size;i++){
+			ChoiseQustionBean tempBean = list.get(i);
+			
+			ContentValues contentValues = new ContentValues();
+			contentValues.put(F_NUMBER, tempBean.number);
+			contentValues.put(F_CHAPTER, tempBean.chapter);
+			contentValues.put(F_PART, tempBean.part);
+			contentValues.put(F_QUESTION_MODE, tempBean.question_mode);
+			contentValues.put(F_QUESTION_CONTENT, tempBean.question_content);
+			contentValues.put(F_PICTURE_NAME, tempBean.picture_name);
+			contentValues.put(F_PICTURE_PATH, tempBean.picture_path);
+			contentValues.put(F_A, tempBean.a);
+			contentValues.put(F_B, tempBean.b);
+			contentValues.put(F_C, tempBean.c);
+			contentValues.put(F_D, tempBean.d);
+			contentValues.put(F_CORRECT_ANSWER_4CHOISE, tempBean.correct_answer_4choise);
+			contentValues.put(F_ANSWER_ANALYSIS, tempBean.answer_analysis);
+			// 插入数据的场景只是在录入数据时，用户的选择是在更改这条数据时
+			
+			db.insert(TB_CHOICE_QUESTION, null, contentValues);
+		}
+		db.close();
+	}
 	
 	/**
 	 * 插入一条判断题数据
@@ -204,7 +234,7 @@ public class TrafficDataBaseAdapter {
 	/**
 	 * 修改用于答题结果for选择题
 	 */
-	public void userAnswerTheQuestion(UserAnswer4Choise userAnswer){
+	public void userAnswerTheQuestion(ChoiseQustionBean userAnswer){
 		ContentValues contentValues = new ContentValues();
 		
         contentValues.put(F_USER_ANSWER_4CHOISE, userAnswer.user_answer_4choise);
@@ -217,7 +247,7 @@ public class TrafficDataBaseAdapter {
 	/**
 	 * 修改用于答题结果for判断题
 	 */
-	public void userAnswerTheQuestion(UserAnswer4TrueOrFalse userAnswer){
+	public void userAnswerTheQuestion(TrueOrFalseQustionBean userAnswer){
 		ContentValues contentValues = new ContentValues();
 		
         contentValues.put(F_USER_ANSWER_4TRUEFALSE, userAnswer.user_answer_4truefalse);

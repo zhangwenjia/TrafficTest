@@ -13,5 +13,6 @@ public class TrueOrFalseQustionBean {
 	public String correct_answer_4truefalse;
 	public String answer_analysis;
 	
-	public UserAnswer4TrueOrFalse userAnswer;
+	public String user_answer_4truefalse;
+	public String user_result;
 }
